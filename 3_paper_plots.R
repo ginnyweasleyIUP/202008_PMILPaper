@@ -29,19 +29,12 @@ rm(entity, data, ii)
 
 # 0.2: Cluster
 
+# distance based-clustering
 dist<-fossil::earth.dist(cbind(DATA_past1000$CAVES$entity_info$latitude[mask_spec],DATA_past1000$CAVES$entity_info$longitude[mask_spec]),dist=TRUE)
 hc<-hclust(dist)
 DATA_past1000$CAVES$cluster_list <- list(entity_id = as.numeric(DATA_past1000$CAVES$entity_info$entity_id[mask_spec]), cluster_id = as.numeric(cutree(hc,k=8)))
 
-# map(database='world')
-# Point_Lyr <- list(
-#   lat = DATA_past1000$CAVES$entity_info$latitude[mask_spec],
-#   long = DATA_past1000$CAVES$entity_info$longitude[mask_spec],
-#   value = DATA_past1000$CAVES$cluster_list$cluster_id
-# )
-# points(Point_Lyr$long,Point_Lyr$lat,col=Point_Lyr$value+1,pch=Point_Lyr$value)
-
-#manually sort cluster = 9 in south east asia. This is e_ID: 226, 238, 319, 335, 367, 399, 436, 523
+# manually sort cluster = 9 in south east asia. This is e_ID: 226, 238, 319, 335, 367, 399, 436, 523
 for(entity in c(226, 238, 319, 335, 367, 399, 436, 523)){
   if(entity %in% DATA_past1000$CAVES$cluster_list$entity_id){
     DATA_past1000$CAVES$cluster_list$cluster_id[which(DATA_past1000$CAVES$cluster_list$entity_id == entity)] = 9
@@ -54,6 +47,7 @@ rm(dist, hc, entity)
 
 ## Gridbox list
 
+# sorting entities into gridboxes
 DATA_past1000$CAVES$gridbox_list <- list(entity_id = as.numeric(DATA_past1000$CAVES$entity_info$entity_id[mask_spec]), gridbox_id = numeric(sum(mask_spec)))
 
 for(ii in 1:sum(mask_spec)){

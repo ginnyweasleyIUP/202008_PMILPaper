@@ -381,6 +381,7 @@ remove(ii, name, pos_start, pos_stop, year, entity_id, run)
 
 ## Aragonite and Calcite d18O have to be converted to drip water equivalents to be comparable
 ## Also in ORder to be comparable to SMOW which is the standard of the simulation we need to convert the dripwater d18O from VPDB to SMOW
+print("Drip-Water Conversion")
 
 mineralogy = character(length(DATA_past1000$CAVES$entity_info$entity_id))
 
@@ -443,7 +444,7 @@ DATA_past1000$CAVES$site_info <- DATA_past1000$CAVES$site_info %>% mutate(elevat
 load("Data/Timeseries.RData")
 
 source("Functions/aw_mean.R")
-value <- list("a" = numeric(1040), "b" = numeric(1040), "c" = numeric(1040))
+value <- list("a" = numeric(1000), "b" = numeric(1000), "c" = numeric(1000))
 for(ii in 1:length(value$a)){
   value$a[ii] <- simpleawmean(DATA_past1000$SIM_yearly_a$TEMP[,,ii])
   value$b[ii] <- simpleawmean(DATA_past1000$SIM_yearly_b$TEMP[,,ii])
@@ -458,17 +459,15 @@ Timeseries$HadCM3_GMST_c <- zoo(x = value$c-mean(value$c[1:100])-0.2, order.by =
 
 ##Bunker site_id = 117, entity_id = 240,242
 # HadCM3 Bunker cave --> site 117
-data_240 <- DATA_past1000$CAVES$record_res %>% filter(entity_id == 240)
-data_242 <- DATA_past1000$CAVES$record_res %>% filter(entity_id == 242)
+data_240 <- DATA_past1000$CAVES$record_data$ENTITY240
+data_242 <- DATA_past1000$CAVES$record_data$ENTITY242
 
 Timeseries$SISAL_Bunker_240 <- zoo(x = data_240$d18O_dw_eq_a, order.by = -1*data_240$interp_age)
 Timeseries$SISAL_Bunker_242 <- zoo(x = data_242$d18O_dw_eq_a, order.by = -1*data_242$interp_age)
-data_240 <- DATA_past1000$CAVES$yearly_res$a %>% filter(entity_id == 240)
-Timeseries$HadCM3_Bunker_a <- zoo(x = data_240$ISOT, order.by = seq(from = -1*(1140), to = -1*(100), by = 1)) 
-data_240 <- DATA_past1000$CAVES$yearly_res$b %>% filter(entity_id == 240)
-Timeseries$HadCM3_Bunker_b <- zoo(x = data_240$ISOT, order.by = seq(from = -1*(1140), to = -1*(100), by = 1))
-data_240 <- DATA_past1000$CAVES$yearly_res$c %>% filter(entity_id == 240)
-Timeseries$HadCM3_Bunker_c <- zoo(x = data_240$ISOT, order.by = seq(from = -1*(1140), to = -1*(100), by = 1))
+data_240 <- DATA_past1000$CAVES$sim_data_yearly$ENTITY240
+Timeseries$HadCM3_Bunker_a <- zoo(x = data_240$ISOT_a, order.by = seq(from = -1*(1100)+1, to = -1*(100), by = 1)) 
+Timeseries$HadCM3_Bunker_b <- zoo(x = data_240$ISOT_b, order.by = seq(from = -1*(1100)+1, to = -1*(100), by = 1))
+Timeseries$HadCM3_Bunker_c <- zoo(x = data_240$ISOT_c, order.by = seq(from = -1*(1100)+1, to = -1*(100), by = 1))
 
 rm(value, data_240, data_242, ii)
 
