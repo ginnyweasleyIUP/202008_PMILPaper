@@ -1,0 +1,1 @@
+http://geonode.crc806db.uni-koeln.de:80/geoserver/ows?service=WFS&version=1.0.0&request=GetFeature&typeNames=geonode%3Akarst_wgs&outputFormat=SHAPE-ZIP
