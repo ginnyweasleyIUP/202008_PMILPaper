@@ -69,7 +69,8 @@ for(run in c("a", "b", "c")){
   }else{
     ncf<-ncdf4::nc_open(paste0("/stacywork/hadcm3/precipitation/monthly_fixed/xnap",run,".nc")) 
   }
-  DATA_past1000_SIM_RAW[[run]]$PREC <- clear_data_matrix(ncdf4::ncvar_get(ncf),2)
+  PREC <- clear_data_matrix(ncdf4::ncvar_get(ncf),2)
+  DATA_past1000_SIM_RAW[[run]]$PREC <- PREC
   DATA_past1000_SIM_RAW[[run]]$PREC_t <- ncf$dim$t$vals
   DATA_past1000$SIM_mean$lon <- ncf$dim$longitude$vals
   DATA_past1000$SIM_mean$lat <- ncf$dim$latitude$vals
@@ -80,7 +81,10 @@ for(run in c("a", "b", "c")){
   }else{
     ncf<-ncdf4::nc_open(paste0("/stacywork/hadcm3/isotopes/monthly_fixed/xnap",run,".nc"))
   }
-  DATA_past1000_SIM_RAW[[run]]$ISOT <- clear_data_matrix(ncdf4::ncvar_get(ncf, 'dO18'),3)
+  ISOT <- ncdf4::ncvar_get(ncf, 'dO18')
+  ISOT[PREC*86400*360==0] = NA
+  DATA_past1000_SIM_RAW[[run]]$ISOT <- ISOT
+  
   DATA_past1000_SIM_RAW[[run]]$ISOT_t <- ncf$dim$t$vals
   ncdf4::nc_close(ncf)
   
@@ -177,20 +181,20 @@ for(run in c("a", "b", "c")){
     ratios <- extract_gridboxes(lon_cave, lat_cave)
     
     name <- paste0("ENTITY",entity_id)
-    DATA_past1000$CAVES$sim_data_raw[[name]][[paste0("TEMP_",run)]] <- rowSums(cbind(ratios$E1*DATA_past1000_SIM_RAW[[run]]$TEMP[ratios$E1_lon_pos, ratios$E1_lat_pos,],
-                                                                                     ratios$E2*DATA_past1000_SIM_RAW[[run]]$TEMP[ratios$E2_lon_pos, ratios$E2_lat_pos,],
-                                                                                     ratios$E3*DATA_past1000_SIM_RAW[[run]]$TEMP[ratios$E3_lon_pos, ratios$E3_lat_pos,],
-                                                                                     ratios$E4*DATA_past1000_SIM_RAW[[run]]$TEMP[ratios$E4_lon_pos, ratios$E4_lat_pos,]), na.rm = T)
+    DATA_past1000$CAVES$sim_data_raw[[name]][[paste0("TEMP_",run)]] <- rowSums(cbind(ratios$Q11*DATA_past1000_SIM_RAW[[run]]$TEMP[ratios$Q11_lon, ratios$Q11_lat,],
+                                                                                     ratios$Q12*DATA_past1000_SIM_RAW[[run]]$TEMP[ratios$Q12_lon, ratios$Q12_lat,],
+                                                                                     ratios$Q21*DATA_past1000_SIM_RAW[[run]]$TEMP[ratios$Q21_lon, ratios$Q21_lat,],
+                                                                                     ratios$Q22*DATA_past1000_SIM_RAW[[run]]$TEMP[ratios$Q22_lon, ratios$Q22_lat,]), na.rm = T)
     
-    DATA_past1000$CAVES$sim_data_raw[[name]][[paste0("PREC_",run)]] <- rowSums(cbind(ratios$E1*DATA_past1000_SIM_RAW[[run]]$PREC[ratios$E1_lon_pos, ratios$E1_lat_pos,],
-                                                                                     ratios$E2*DATA_past1000_SIM_RAW[[run]]$PREC[ratios$E2_lon_pos, ratios$E2_lat_pos,],
-                                                                                     ratios$E3*DATA_past1000_SIM_RAW[[run]]$PREC[ratios$E3_lon_pos, ratios$E3_lat_pos,],
-                                                                                     ratios$E4*DATA_past1000_SIM_RAW[[run]]$PREC[ratios$E4_lon_pos, ratios$E4_lat_pos,]), na.rm = T)
+    DATA_past1000$CAVES$sim_data_raw[[name]][[paste0("PREC_",run)]] <- rowSums(cbind(ratios$Q11*DATA_past1000_SIM_RAW[[run]]$PREC[ratios$Q11_lon, ratios$Q11_lat,],
+                                                                                     ratios$Q12*DATA_past1000_SIM_RAW[[run]]$PREC[ratios$Q12_lon, ratios$Q12_lat,],
+                                                                                     ratios$Q21*DATA_past1000_SIM_RAW[[run]]$PREC[ratios$Q21_lon, ratios$Q21_lat,],
+                                                                                     ratios$Q22*DATA_past1000_SIM_RAW[[run]]$PREC[ratios$Q22_lon, ratios$Q22_lat,]), na.rm = T)
     
-    DATA_past1000$CAVES$sim_data_raw[[name]][[paste0("ISOT_",run)]] <- rowSums(cbind(ratios$E1*DATA_past1000_SIM_RAW[[run]]$ISOT[ratios$E1_lon_pos, ratios$E1_lat_pos,],
-                                                                                     ratios$E2*DATA_past1000_SIM_RAW[[run]]$ISOT[ratios$E2_lon_pos, ratios$E2_lat_pos,],
-                                                                                     ratios$E3*DATA_past1000_SIM_RAW[[run]]$ISOT[ratios$E3_lon_pos, ratios$E3_lat_pos,],
-                                                                                     ratios$E4*DATA_past1000_SIM_RAW[[run]]$ISOT[ratios$E4_lon_pos, ratios$E4_lat_pos,]), na.rm = T)
+    DATA_past1000$CAVES$sim_data_raw[[name]][[paste0("ISOT_",run)]] <- rowSums(cbind(ratios$Q11*DATA_past1000_SIM_RAW[[run]]$ISOT[ratios$Q11_lon, ratios$Q11_lat,],
+                                                                                     ratios$Q12*DATA_past1000_SIM_RAW[[run]]$ISOT[ratios$Q12_lon, ratios$Q12_lat,],
+                                                                                     ratios$Q21*DATA_past1000_SIM_RAW[[run]]$ISOT[ratios$Q21_lon, ratios$Q21_lat,],
+                                                                                     ratios$Q22*DATA_past1000_SIM_RAW[[run]]$ISOT[ratios$Q22_lon, ratios$Q22_lat,]), na.rm = T)
   }
 }
 
@@ -206,10 +210,10 @@ for (ii in 1:(length(DATA_past1000$CAVES$entity_info$entity_id))){
   ratios <- extract_gridboxes(lon_cave, lat_cave)
   
   elevation_cave_sim[ii,1] <- DATA_past1000$CAVES$entity_info$entity_id[ii]
-  elevation_cave_sim[ii,2] <- ratios$E1*DATA_past1000$SIM_mean$OROG[ratios$E1_lon_pos, ratios$E1_lat_pos] +
-    ratios$E2*DATA_past1000$SIM_mean$OROG[ratios$E2_lon_pos, ratios$E2_lat_pos] +
-    ratios$E3*DATA_past1000$SIM_mean$OROG[ratios$E3_lon_pos, ratios$E3_lat_pos] +
-    ratios$E4*DATA_past1000$SIM_mean$OROG[ratios$E4_lon_pos, ratios$E4_lat_pos]
+  elevation_cave_sim[ii,2] <- ratios$Q11*DATA_past1000$SIM_mean$OROG[ratios$Q11_lon, ratios$Q11_lat] +
+    ratios$Q12*DATA_past1000$SIM_mean$OROG[ratios$Q12_lon, ratios$Q12_lat] +
+    ratios$Q21*DATA_past1000$SIM_mean$OROG[ratios$Q21_lon, ratios$Q21_lat] +
+    ratios$Q22*DATA_past1000$SIM_mean$OROG[ratios$Q22_lon, ratios$Q22_lat]
   
   elevation_cave_sim[ii,3] <- elevation_cave_sim[ii,2] - DATA_past1000$CAVES$entity_info$elevation[ii]
   

@@ -104,7 +104,7 @@ source("Functions/Paper_Plots/Fig5_Variance_Histo.R")
 
 # 6: Spectrum
 
-#Analysis before!!!
+#Analysis before plotting!!!
 source("Functions/Analytics/Spectra_Analytics.R")
 
 source("Functions/Paper_Plots/Fig6_Spectrum.R")
@@ -123,8 +123,4 @@ source("Functions/Paper_Plots/Fig8_Network.R")
 
 source("Functions/Analytics/Ensemble_Analytics.R") #also SF5
 source("Functions/Paper_Plots/Fig9_Network_boxplot.R")
-
-
-
-
 

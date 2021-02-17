@@ -86,7 +86,7 @@ plot(scatter_data$latitude[mask_mean_calcite], scatter_data$d18Oc[mask_mean_calc
      xlab = "", ylab = "", ylim = c(-20,5), panel.first = grid(),
      pch = 16, col = adjustcolor("black", alpha.f = 0.5), cex = 2, cex.axis = cexaxis)
 points(scatter_data$latitude[mask_mean_aragonite], scatter_data$d18Oc[mask_mean_aragonite], 
-       pch = 16, col = adjustcolor("blue", alpha.f = 0.5), cex = 2, cex.axis = cexaxis)
+       pch = 17, col = adjustcolor("blue", alpha.f = 0.5), cex = 2, cex.axis = cexaxis)
 abline(h=0)
 lm.out <- lm(scatter_data$d18Oc ~ scatter_data$latitude)
 abline(lm.out, lwd = 4, col = "#B2182B")
@@ -105,7 +105,7 @@ plot(scatter_data$mean_temp[mask_mean_calcite], scatter_data$d18Oc[mask_mean_cal
      yaxt = 'n', xlab = "", ylab = "", ylim = c(-20,5), panel.first = grid(),
      pch = 16, col = adjustcolor("black", alpha.f = 0.5), cex = 2, cex.axis = cexaxis)
 points(scatter_data$mean_temp[mask_mean_aragonite], scatter_data$d18Oc[mask_mean_aragonite], 
-       pch = 16, col = adjustcolor("blue", alpha.f = 0.5), cex = 2, cex.axis = cexaxis)
+       pch = 17, col = adjustcolor("blue", alpha.f = 0.5), cex = 2, cex.axis = cexaxis)
 abline(h=0)
 lm.out <- lm(scatter_data$d18Oc ~ scatter_data$mean_temp)
 abline(lm.out, lwd = 4, col = "#B2182B")
@@ -124,7 +124,7 @@ plot(scatter_data$latitude[mask_mean_calcite], scatter_data$diff_down[mask_mean_
      xlab = "", ylab = "", ylim = c(-10,10), panel.first = grid(),
      pch = 16, col = adjustcolor("black", alpha.f = 0.5), cex = 2, cex.axis = cexaxis)
 points(scatter_data$latitude[mask_mean_aragonite], scatter_data$diff_down[mask_mean_aragonite], 
-       pch = 16, col = adjustcolor("blue", alpha.f = 0.5), cex = 2, cex.axis = cexaxis)
+       pch = 17, col = adjustcolor("blue", alpha.f = 0.5), cex = 2, cex.axis = cexaxis)
 abline(h=0)
 lm.out <- lm(scatter_data$diff_down ~ scatter_data$latitude)
 abline(lm.out, lwd = 4, col = "#B2182B")
@@ -143,7 +143,7 @@ plot(scatter_data$mean_temp[mask_mean_calcite], scatter_data$diff_down[mask_mean
      pch = 16, col = adjustcolor("black", alpha.f = 0.5), cex = 2, cex.axis = cexaxis)
 abline(h=0)
 points(scatter_data$mean_temp[mask_mean_aragonite], scatter_data$diff_down[mask_mean_aragonite], 
-       pch = 16, col = adjustcolor("blue", alpha.f = 0.5), cex = 2, cex.axis = cexaxis)
+       pch = 17, col = adjustcolor("blue", alpha.f = 0.5), cex = 2, cex.axis = cexaxis)
 lm.out <- lm(scatter_data$diff_down ~ scatter_data$mean_temp)
 abline(lm.out, lwd = 4, col = "#B2182B")
 #lines(lowess(scatter_data$mean_temp, scatter_data$diff_full, f = 2/3, delta = 0.01*diff(range(scatter_data$mean_temp, na.rm = T))), lwd = 4, 
@@ -169,7 +169,7 @@ plot(scatter_data$mean_prec[mask_mean_calcite], scatter_data$diff_down[mask_mean
      pch = 16, col = adjustcolor("black", alpha.f = 0.5), cex = 2, cex.axis = cexaxis)
 abline(h=0)
 points(scatter_data$mean_prec[mask_mean_aragonite], scatter_data$diff_down[mask_mean_aragonite], 
-       pch = 16, col = adjustcolor("blue", alpha.f = 0.5), cex = 2, cex.axis = cexaxis)
+       pch = 17, col = adjustcolor("blue", alpha.f = 0.5), cex = 2, cex.axis = cexaxis)
 lm.out <- lm(scatter_data$diff_down ~ scatter_data$mean_prec)
 abline(lm.out, lwd = 4, col = "#B2182B")
 #lines(lowess(scatter_data$mean_prec, scatter_data$diff_down, f = 2/3, delta = 0.01*diff(range(scatter_data$winter_mean_prec, na.rm = T))), lwd = 4, 
@@ -185,7 +185,7 @@ plot(scatter_data$winter_mean_prec[mask_mean_calcite], scatter_data$diff_down[ma
      pch = 16, col = adjustcolor("black", alpha.f = 0.5), cex = 2, cex.axis = cexaxis)
 abline(h=0)
 points(scatter_data$winter_mean_prec[mask_mean_aragonite], scatter_data$diff_down[mask_mean_aragonite],
-       pch = 16, col = adjustcolor("blue", alpha.f = 0.5), cex = 2, cex.axis = cexaxis)
+       pch = 17, col = adjustcolor("blue", alpha.f = 0.5), cex = 2, cex.axis = cexaxis)
 lm.out <- lm(scatter_data$diff_down ~ scatter_data$winter_mean_prec)
 abline(lm.out, lwd = 4, col = "#B2182B")
 #lines(lowess(scatter_data$winter_mean_prec, scatter_data$diff_down, f = 2/3, delta = 0.01*diff(range(scatter_data$winter_mean_prec, na.rm = T))), lwd = 4, 
@@ -201,7 +201,7 @@ plot(scatter_data$summer_mean_prec[mask_mean_calcite], scatter_data$diff_down[ma
      pch = 16, col = adjustcolor("black", alpha.f = 0.5), cex = 2, cex.axis = cexaxis)
 abline(h=0)
 points(scatter_data$summer_mean_prec[mask_mean_aragonite], scatter_data$diff_down[mask_mean_aragonite],
-       pch = 16, col = adjustcolor("blue", alpha.f = 0.5), cex = 2, cex.axis = cexaxis)
+       pch = 17, col = adjustcolor("blue", alpha.f = 0.5), cex = 2, cex.axis = cexaxis)
 lm.out <- lm(scatter_data$diff_down ~ scatter_data$summer_mean_prec)
 abline(lm.out, lwd = 4, col = "#B2182B")
 #lines(lowess(scatter_data$winter_mean_prec, scatter_data$diff_down, f = 2/3, delta = 0.01*diff(range(scatter_data$winter_mean_prec, na.rm = T))), lwd = 4, 
@@ -216,7 +216,7 @@ plot(scatter_data$elevation[mask_mean_calcite], scatter_data$diff_down[mask_mean
      pch = 16, col = adjustcolor("black", alpha.f = 0.5), cex = 2, cex.axis = cexaxis)
 abline(h=0)
 points(scatter_data$elevation[mask_mean_aragonite], scatter_data$diff_down[mask_mean_aragonite], 
-       pch = 16, col = adjustcolor("blue", alpha.f = 0.5), cex = 2, cex.axis = cexaxis)
+       pch = 17, col = adjustcolor("blue", alpha.f = 0.5), cex = 2, cex.axis = cexaxis)
 lm.out <- lm(scatter_data$diff_down ~ scatter_data$elevation)
 abline(lm.out, lwd = 4, col = "#B2182B")
 #lines(lowess(na.omit(as.numeric(scatter_data$elevation)), scatter_data$diff_down[!is.na(as.numeric(scatter_data$elevation))], f = 2/3, delta = 0.01*diff(range(scatter_data$elevation, na.rm = T))), lwd = 4, 
@@ -231,7 +231,7 @@ plot(scatter_data$elevation_diff[mask_mean_calcite], scatter_data$diff_down[mask
      pch = 16, col = adjustcolor("black", alpha.f = 0.5), cex = 2, cex.axis = cexaxis)
 abline(h=0)
 points(scatter_data$elevation_diff[mask_mean_aragonite], scatter_data$diff_down[mask_mean_aragonite], 
-       pch = 16, col = adjustcolor("blue", alpha.f = 0.5), cex = 2, cex.axis = cexaxis)
+       pch = 17, col = adjustcolor("blue", alpha.f = 0.5), cex = 2, cex.axis = cexaxis)
 lm.out <- lm(scatter_data$diff_down ~ scatter_data$elevation_diff)
 abline(lm.out, lwd = 4, col = "#B2182B")
 #lines(lowess(na.omit(scatter_data$elevation_diff), scatter_data$diff_down[!is.na(scatter_data$diff_down)], f = 2/5, delta = 0.01*diff(range(scatter_data$elevation, na.rm = T))), lwd = 4, 
@@ -246,7 +246,7 @@ plot(scatter_data$cover_thickness[mask_mean_calcite], scatter_data$diff_down[mas
      pch = 16, col = adjustcolor("black", alpha.f = 0.5), cex = 2, cex.axis = cexaxis)
 abline(h=0)
 points(scatter_data$cover_thickness[mask_mean_aragonite], scatter_data$diff_down[mask_mean_aragonite], 
-       pch = 16, col = adjustcolor("blue", alpha.f = 0.5), cex = 2, cex.axis = cexaxis)
+       pch = 17, col = adjustcolor("blue", alpha.f = 0.5), cex = 2, cex.axis = cexaxis)
 lm.out <- lm(scatter_data$diff_down ~ scatter_data$cover_thickness)
 abline(lm.out, lwd = 4, col = "#B2182B")
 #lines(lowess(na.omit(scatter_data$cover_thickness), scatter_data$diff_down[!is.na(scatter_data$cover_thickness)], f = 2/3, delta = 0.01*diff(range(scatter_data$mean_temp, na.rm = T))), lwd = 4, 
